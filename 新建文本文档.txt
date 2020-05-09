@@ -1,0 +1,78 @@
+路由拦截器
+	网页标题设置
+	进度条启动
+	验证Token，判断用户是否登录，没有登录且跳转的不是登录页面就重定向去登录页面
+	，若访问的就是登录页面就无需重定向，并完成进度条
+	若用户登录
+	权限确认
+请求拦截器
+	主要是针对Token
+响应拦截器
+	主要是服务器出错时通过Notice的形式反馈给用户，而不是在控制台报错
+登录页面
+	getCode()	获取验证码
+			调用后端API	生成图片转换成base64编码和UUID
+			？和 T 的区别
+			T extends A	T是A类或A类的子类
+			T super	A	T是A类或A类的父类
+			
+	
+	getCookie()	获取cookie，如果cookie里有就用cookie的否则默认
+	
+	handleLogin()	加密用户密码，如果记住我，就添加Cookie,没有就删除
+			调用后端API	验证，如果用户输入有误抛出异常让前端捕获
+					如果通过就生成用户信息跟Token返回给前端
+			@click.native.prevent
+				native	父组件给子组件绑定事件时需要native才能触发，否则不能
+				prevent	阻止默认事件
+首页
+	router	dashboard
+		layout/index
+		sidebar		logo
+				el-scrollbar	递归嵌套多级菜单
+					el-menu
+
+		main-container	navbar
+				tags-view
+				app-main
+				right-panel	setting
+
+后端返回ResponseEntity
+		静态方法	ok	有参（Body信息）、无参
+		接口		BodyBuilder
+
+后端实体实现serializable接口的原因
+
+后端SpringBoot整合Redis
+	Redis数据结构
+		string
+		list
+		set
+		zset(有序集合)
+		hash
+	哨兵架构
+	集群架构
+
+获取用户信息
+	前端getUserInfo()	=> auth/info
+	后端	jwtUser
+		
+eladmin的SpringSecurity
+	TokenProvider 创建、校验、获取Token以及获取权限
+
+	TokenFilter	使用TokenProvider,处理HTTP请求，并解析Token
+	
+	TokenConfigurer	使用TokenProvider、和TokenFilter
+
+整合SpringSecurity + jwt
+	配置类 SecurityConfig extends WebSecurityConfigurerAdapter
+		configure重写
+			配置异常处理
+			配置路由权限
+			CSRF
+			sessionManagement
+			addFilterBefore		负责jwt验证
+			
+
+		
+	
